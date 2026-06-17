@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Photography &mdash; Yannick Giraud</title>
+  <link rel="icon" type="image/jpeg" href="images/favicon.jpeg" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .photo-page {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      height: calc(100vh - var(--header-height));
+      overflow: hidden;
+    }
+
+    /* ── Left panel ── */
+    .photo-projects-panel {
+      overflow-y: auto;
+      padding: 2.5rem 2.5rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .photo-projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* ── Right panel: slideshow ── */
+    .photo-slideshow-panel {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .photo-slides {
+      position: relative;
+      width: 100%;
+      height: 100%;
+    }
+
+    .photo-slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.9s ease;
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3.5rem 4rem;
+    }
+
+    .photo-slide.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .photo-slide img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    .photo-slide-caption {
+      position: absolute;
+      bottom: 1.75rem;
+      left: 1.75rem;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.45);
+    }
+
+    .slideshow-dots {
+      position: absolute;
+      bottom: 1.75rem;
+      right: 1.75rem;
+      display: flex;
+      gap: 0.5rem;
+      z-index: 10;
+    }
+
+    .slideshow-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      transition: background 0.25s;
+    }
+
+    .slideshow-dot.active {
+      background: rgba(255, 255, 255, 0.75);
+    }
+
+    /* ── Hover overlay ── */
+    .photo-hover-overlay {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 5;
+      background: var(--bg);
+    }
+
+    .photo-hover-overlay.active {
+      opacity: 1;
+    }
+
+    .photo-hover-overlay .hover-img {
+      position: absolute;
+      inset: 0;
+      display: none;
+      width: 100%;
+      height: 100%;
+      padding: 3.5rem 4rem;
+      object-fit: contain;
+      box-sizing: border-box;
+    }
+
+    .photo-hover-overlay .hover-img.active {
+      display: block;
+    }
+
+    @media (max-width: 640px) {
+      .photo-page {
+        grid-template-columns: 1fr;
+        height: auto;
+        overflow: visible;
+      }
+
+      .photo-slideshow-panel {
+        height: 65vw;
+        min-height: 240px;
+        border-top: 1px solid var(--border);
+      }
+
+      .photo-projects-panel {
+        border-right: none;
+        overflow-y: visible;
+        padding: 1.5rem;
+      }
+
+      .photo-projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a class="header-logo" href="index.html">Yannick Giraud <span class="header-subtitle">Cinematography</span></a>
+    <nav class="header-nav">
+      <a href="film.html">Film</a>
+      <a href="photography.html" class="active">Photography</a>
+      <a href="contact.html">Contact</a>
+      <a href="https://www.instagram.com/yannick_giraud" target="_blank" rel="noopener" class="instagram-link" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+          <circle cx="12" cy="12" r="4"/>
+          <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+        </svg>
+      </a>
+    </nav>
+    <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false"><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span><span class="nav-toggle-bar"></span></button>
+  </header>
+
+  <main class="photo-page">
+
+    <!-- Left: Projects grid -->
+    <div class="photo-projects-panel">
+      <div class="photo-projects-grid">
+
+        <a class="photo-project-card" href="film-portraits.html"
+           data-previews="photography/Film Portraits/4.jpg|photography/Film Portraits/Scherm­afbeelding 2026-06-17 om 15.58.54.png|photography/Film Portraits/Scherm­afbeelding 2026-06-17 om 15.59.17.png|photography/Film Portraits/Scherm­afbeelding 2026-06-17 om 16.00.14.png|photography/Film Portraits/Scherm­afbeelding 2026-06-17 om 16.01.05.png|photography/Film Portraits/Scherm­afbeelding 2026-06-17 om 16.01.19.png|photography/Film Portraits/Scherm­afbeelding 2026-06-17 om 16.01.36.png|photography/Film Portraits/Scherm­afbeelding 2026-06-17 om 16.06.24.png|photography/Film Portraits/Scherm­afbeelding 2026-06-17 om 16.06.34.png|photography/Film Portraits/Scherm­afbeelding 2026-06-17 om 16.07.05.png|photography/Film Portraits/Scherm­afbeelding 2026-06-17 om 16.07.26.png|photography/Film Portraits/Scherm­afbeelding 2026-06-17 om 16.07.43.png|photography/Film Portraits/Scherm­afbeelding 2026-06-17 om 16.09.16.png|photography/Film Portraits/Scherm­afbeelding 2026-06-17 om 16.09.26.png|photography/Film Portraits/Scherm­afbeelding 2026-06-17 om 16.10.05.png|photography/Film Portraits/Scherm­afbeelding 2026-06-17 om 16.10.28.png|photography/Film Portraits/Scherm­afbeelding 2026-06-17 om 16.15.01.png">
+          <div class="photo-project-card-img">
+            <img src="photography/Film Portraits/Scherm­afbeelding 2026-06-17 om 16.10.05.png" alt="Film Portraits" loading="lazy" />
+          </div>
+          <div class="photo-project-card-title">Film Portraits</div>
+          <div class="photo-project-card-meta">Selected Work</div>
+        </a>
+
+        <a class="photo-project-card" href="hummingbird.html"
+           data-previews="photography/Hummingbird/P1011753.jpg|photography/Hummingbird/P1011763.jpg|photography/Hummingbird/P1011772.jpg|photography/Hummingbird/P1011823.jpg|photography/Hummingbird/P1011991.jpg|photography/Hummingbird/P1012051.jpg|photography/Hummingbird/P1012105.jpg|photography/Hummingbird/P1012122.jpg">
+          <div class="photo-project-card-img">
+            <img src="photography/Hummingbird/P1011862.jpg" alt="Hummingbird" loading="lazy" />
+          </div>
+          <div class="photo-project-card-title">Hummingbird <span class="photo-project-card-year">2026</span></div>
+          <div class="photo-project-card-meta">Commercial Photography</div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- Right: Slideshow -->
+    <div class="photo-slideshow-panel">
+      <div class="photo-slides">
+
+        <div class="photo-slide active">
+          <img src="photography/Street Photography/P1011122.jpg" alt="" />
+          <span class="photo-slide-caption">Copenhagen, 2025</span>
+        </div>
+
+        <div class="photo-slide">
+          <img src="photography/Street Photography/P1011391.jpg" alt="" />
+          <span class="photo-slide-caption">Tokyo, 2025</span>
+        </div>
+
+        <div class="photo-slide">
+          <img src="photography/Street Photography/P1011402.jpg" alt="" />
+          <span class="photo-slide-caption">Kyoto, 2025</span>
+        </div>
+
+        <div class="photo-slide">
+          <img src="photography/Street Photography/P1011406.jpg" alt="" />
+          <span class="photo-slide-caption">Tokyo, 2025</span>
+        </div>
+
+        <div class="photo-slide">
+          <img src="photography/Street Photography/P1011407.jpg" alt="" />
+          <span class="photo-slide-caption">Kyoto, 2025</span>
+        </div>
+
+        <div class="photo-slide">
+          <img src="photography/Street Photography/P1011485.jpg" alt="" />
+          <span class="photo-slide-caption">Tokyo, 2025</span>
+        </div>
+
+      </div>
+
+      <div class="photo-hover-overlay"></div>
+
+      <div class="slideshow-dots">
+        <span class="slideshow-dot active"></span>
+        <span class="slideshow-dot"></span>
+        <span class="slideshow-dot"></span>
+        <span class="slideshow-dot"></span>
+        <span class="slideshow-dot"></span>
+        <span class="slideshow-dot"></span>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    const slides = document.querySelectorAll('.photo-slide');
+    const dots   = document.querySelectorAll('.slideshow-dot');
+    let current  = 0;
+    let timer;
+
+    function goTo(idx) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = (idx + slides.length) % slides.length;
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+      clearInterval(timer);
+      timer = setInterval(() => goTo(current + 1), 4500);
+    }
+
+    dots.forEach((dot, i) => dot.addEventListener('click', () => goTo(i)));
+    timer = setInterval(() => goTo(current + 1), 4500);
+
+    const hoverOverlay = document.querySelector('.photo-hover-overlay');
+
+    document.querySelectorAll('.photo-project-card').forEach(card => {
+      const pool = (card.dataset.previews || '').split('|').filter(Boolean);
+      if (!pool.length) return;
+
+      // One <img> per card lives permanently in the overlay, hidden until needed.
+      const img = document.createElement('img');
+      img.className = 'hover-img';
+      img.alt = '';
+      hoverOverlay.appendChild(img);
+
+      let lastSrc = '';
+
+      function loadNext() {
+        const choices = pool.length > 1 ? pool.filter(s => s !== lastSrc) : pool;
+        const src = choices[Math.floor(Math.random() * choices.length)];
+        lastSrc = src;
+        img.src = src; // src only ever changes while the img is hidden
+      }
+
+      loadNext(); // seed the first image before any hover
+
+      card.addEventListener('mouseenter', () => {
+        // No src change here — just reveal the already-loaded img
+        document.querySelectorAll('.photo-hover-overlay .hover-img').forEach(i => i.classList.remove('active'));
+        img.classList.add('active');
+        hoverOverlay.classList.add('active');
+        clearInterval(timer);
+      });
+
+      card.addEventListener('mouseleave', () => {
+        img.classList.remove('active');
+        hoverOverlay.classList.remove('active');
+        timer = setInterval(() => goTo(current + 1), 4500);
+        loadNext(); // update src now that img is hidden
+      });
+    });
+  </script>
+
+  <script src="js/nav.js"></script>
+</body>
+</html>

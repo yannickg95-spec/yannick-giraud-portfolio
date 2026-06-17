@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yannick Giraud</title>
+  <link rel="icon" type="image/jpeg" href="images/favicon.jpeg" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body class="landing-page">
+
+  <div class="landing-wrap">
+
+    <div class="landing-top">
+      <div class="landing-name-group">
+        <span class="landing-name">Yannick Giraud</span>
+        <span class="landing-subtitle">Cinematography</span>
+      </div>
+      <a class="landing-contact-link" href="contact.html">Contact</a>
+    </div>
+
+    <div class="landing-panels" id="landing">
+
+      <a class="panel panel--film" href="film.html">
+        <img
+          class="panel-bg"
+          src="januari/013.jpg"
+          alt=""
+          aria-hidden="true"
+        />
+        <video
+          class="panel-video"
+          src="images/Website Launch video 720p.mov"
+          muted
+          loop
+          playsinline
+          preload="auto"
+        ></video>
+        <div class="panel-content">
+          <span class="panel-label">Film</span>
+          <span class="panel-cta">View work &rarr;</span>
+        </div>
+      </a>
+
+      <a class="panel panel--photo" href="photography.html">
+        <img
+          class="panel-bg"
+          src="photography/Street Photography/P1011391.jpg"
+          alt=""
+          aria-hidden="true"
+        />
+        <div class="panel-content">
+          <span class="panel-label">Photography</span>
+          <span class="panel-cta">View work &rarr;</span>
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <script>
+    const landing = document.getElementById('landing');
+    const panels  = landing.querySelectorAll('.panel');
+
+    panels.forEach(panel => {
+      const video = panel.querySelector('.panel-video');
+
+      // Kick off buffering immediately so playback starts instantly on hover.
+      if (video) {
+        const warmUp = video.play();
+        if (warmUp && typeof warmUp.then === 'function') {
+          warmUp.then(() => {
+            video.pause();
+            video.currentTime = 0;
+          }).catch(() => {});
+        }
+      }
+
+      panel.addEventListener('mouseenter', () => {
+        panels.forEach(p => {
+          p.classList.toggle('is-expanded', p === panel);
+          p.classList.toggle('is-shrunk',   p !== panel);
+        });
+        if (video) {
+          video.currentTime = 0;
+          video.play().catch(() => {});
+        }
+      });
+      panel.addEventListener('mouseleave', () => {
+        panels.forEach(p => p.classList.remove('is-expanded', 'is-shrunk'));
+        if (video) video.pause();
+      });
+    });
+  </script>
+
+</body>
+</html>
